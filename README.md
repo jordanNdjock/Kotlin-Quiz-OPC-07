@@ -2,7 +2,7 @@
 Quiz en Kotlin avec timer par question et choix de domaine de l'utilisateur
 
 ## Fonctionnalités
-- Inscription avec nom et mot de passe
+- Inscription avec son nom
 - Choix du domaine de quiz (ex : Informatique, Chimie, Physique, Géographie, Histoire…)
 - 10 questions aléatoires par domaine avec 4 choix de réponses par question
 - Un **timer de 10 secondes** par question (aucune réponse = faux)
