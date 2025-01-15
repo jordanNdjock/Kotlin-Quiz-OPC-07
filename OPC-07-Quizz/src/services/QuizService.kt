@@ -4,7 +4,6 @@ import models.Domain
 import models.User
 import java.util.*
 import kotlin.concurrent.schedule
-import kotlin.concurrent.thread
 import kotlin.system.exitProcess
 
 class QuizService {
@@ -63,17 +62,19 @@ class QuizService {
         }
 
         domain.score = score
-        domain.status = if (score > 5) "🏆 Réussi !" else "❌ Échoué !"
-
-        println("\n\t📊 Score final de ${user.name} : ${domain.score}/10 - Statut : ${domain.status}")
-
-        if (score == 5) {
-            print("\t🔄 Vous avez obtenu 5/10. Voulez-vous recommencer ? (Oui/Non) : ")
-            if (readln().lowercase() == "oui") {
-                startQuiz(user, domain)
-                return
+        domain.status = when {
+            score > 5 -> "🏆 Réussi !"
+            score < 5 -> "❌ Échoué !"
+            else -> {
+                print("\t🔄 Vous avez obtenu 5/10. Voulez-vous recommencer ? (Oui/Non) : ")
+                if (readln().lowercase() == "oui") {
+                    startQuiz(user, domain)
+                    return
+                } else "❌ Échoué !"
             }
         }
+
+        println("\n\t📊 Score final de ${user.name} : ${domain.score}/10 - Statut : ${domain.status}")
 
         print("\t🔄 Voulez-vous essayer un autre domaine ? (Oui/Non) : ")
         if (readln().lowercase() == "oui") {
